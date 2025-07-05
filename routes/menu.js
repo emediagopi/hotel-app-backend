@@ -20,7 +20,8 @@ router.post('/', async (req, res) => {
 // Update menu item
 router.put('/:id', async (req, res) => {
   try {
-    const updated = await Menu.findByIdAndUpdate(req.params.id, req.body, { new: true });
+    const updated = await MenuItem.findByIdAndUpdate(req.params.id, req.body, { new: true });
+    console.log('Updated menu item:', updated);
     res.json(updated);
   } catch (err) {
     res.status(500).json({ error: 'Failed to update menu item' });
@@ -30,7 +31,9 @@ router.put('/:id', async (req, res) => {
 // Delete menu item
 router.delete('/:id', async (req, res) => {
   try {
-    await Menu.findByIdAndDelete(req.params.id);
+    console.log('Deleting menu item Called with ID:', req.params.id);
+    await MenuItem.findByIdAndDelete(req.params.id);
+    console.log('Deleted menu item with ID:', req.params.id);
     res.json({ message: 'Item deleted' });
   } catch (err) {
     res.status(500).json({ error: 'Failed to delete menu item' });
